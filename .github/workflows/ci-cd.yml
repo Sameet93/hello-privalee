@@ -3,6 +3,7 @@ name: CI/CD Workflow
 on: [push]
 
 jobs:
+
   setup-go-module:
     runs-on: ubuntu-latest
     steps:
@@ -13,6 +14,15 @@ jobs:
           go-version: '1.16'
       - name: Initialize Go Module
         run: go mod init ${{ secrets.MODULE_PATH }}
+      - name: Install dependencies
+        run: go mod tidy
+      - name: Upload go.mod as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: go-files
+          path: |
+            go.mod
+            go.sum 
 
   build:
     runs-on: ubuntu-latest
