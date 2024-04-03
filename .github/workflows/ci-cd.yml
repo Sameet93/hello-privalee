@@ -3,6 +3,17 @@ name: CI/CD Workflow
 on: [push]
 
 jobs:
+  setup-go-module:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.16'
+      - name: Initialize Go Module
+        run: go mod init ${{ secrets.MODULE_PATH }}
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -12,7 +23,7 @@ jobs:
       with:
         go-version: '1.16' 
     - name: Build
-      run: go build -v ../../...
+      run: go build -v ./...
 
   test:
     needs: build
