@@ -81,6 +81,9 @@ jobs:
         run: |
           aws eks --region ${{ secrets.AWS_REGION }} update-kubeconfig --name privilee
       
+      - name: Create Kubernetes Namespace
+        run: |
+          kubectl create namespace privilee-app --dry-run=client -o yaml | kubectl apply -f 
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f deployment.yaml
