@@ -13,8 +13,8 @@ spec:
       labels:
         app: privilee-app
         # Ensure these match the labels defined in your Fargate profile
-        key1: "value1"  
-        key2: "value2"
+        key1: value1
+        key2: value2
     spec:
       containers:
       - name: privilee-app
