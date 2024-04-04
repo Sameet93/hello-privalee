@@ -83,7 +83,7 @@ jobs:
       
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f infra/kubernetes/app/deployment.yaml
-          kubectl apply -f infra/kubernetes/app/service.yaml
+          kubectl apply -f ../../infra/kubernetes/app/deployment.yaml
+          kubectl apply -f ../../infra/kubernetes/app/service.yaml
 
 
