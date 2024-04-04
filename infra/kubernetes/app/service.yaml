@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+  namespace: privilee-app  # Replace with your app namespace variable
+spec:
+  selector:
+    app: privilee-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 1323
+  type: LoadBalancer
