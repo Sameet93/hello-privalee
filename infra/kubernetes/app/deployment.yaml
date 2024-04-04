@@ -7,7 +7,9 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: myapp
+      app: privilee-app
+      key1: value1
+      key2: value2
   template:
     metadata:
       labels:
