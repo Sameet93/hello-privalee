@@ -57,6 +57,7 @@ jobs:
       run: go test
 
   build-and-push:
+    needs: setup-go-module
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
