@@ -21,8 +21,3 @@ spec:
         image: 493892691932.dkr.ecr.me-south-1.amazonaws.com/privilee/hello-world:latest  # Replace with your actual image
         ports:
         - containerPort: 8080
-      # This specifies the Fargate launch type for the pods
-      fargateProfileSelector:
-        matchLabels:
-          key1: "value1"
-          key2: "value2"
