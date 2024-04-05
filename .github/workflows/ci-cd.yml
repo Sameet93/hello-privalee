@@ -96,7 +96,7 @@ jobs:
         run: |
           kubectl apply -f nginx-ingress-deploy.yaml
           kubectl apply -f ingress.yaml
-        working-directory: infra/kubernetes/ingress-controller
+        working-directory: infra/kubernetes/nginx
       - name: Scaling policies
         run: |
           kubectl apply -f hpa.yaml
