@@ -13,4 +13,4 @@ RUN go mod download && \
 EXPOSE 1323
 
 # Run
-CMD ["go", "run", "hello-privilee"]
+CMD ["go", "run", "main.go"]
