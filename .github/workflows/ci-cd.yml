@@ -77,17 +77,14 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Update kubeconfig for EKS
-        run: |
-          aws eks --region ${{ secrets.AWS_REGION }} update-kubeconfig --name privilee
-      
-      - name: Create Kubernetes Namespace
-        run: |
-          kubectl create namespace privilee-app --dry-run=client -o yaml | kubectl apply -f - --validate=false
-      - name: Deploy to Kubernetes
-        run: |
-          kubectl apply -f deployment.yaml
-          kubectl apply -f service.yaml
-        working-directory: infra/kubernetes/app
+      - name: Deploy to EKS
+        uses: aws-actions/amazon-eks-kubectl@master
+        with:
+          cluster-name: privilee
+          command: apply -f deployment.yaml -f service.yaml
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
 
 
