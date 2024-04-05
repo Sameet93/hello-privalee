@@ -99,7 +99,7 @@ jobs:
         working-directory: infra/kubernetes/nginx
       - name: Scaling policies
         run: |
-          kubectl apply -f hpa.yaml
+          kubectl apply -f hpa-cron.yaml
         working-directory: infra/kubernetes/app
 
 
