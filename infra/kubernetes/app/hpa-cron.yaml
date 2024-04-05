@@ -1,0 +1,69 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: myapp-hpa
+  namespace: privilee-app
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: myapp-deployment
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: scale-up-myapp
+  namespace: privilee-app
+spec:
+  schedule: "0 18 * * FRI"  # Every Friday at 18:00
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: kubectl
+            image: bitnami/kubectl
+            command:
+            - "kubectl"
+            - "scale"
+            - "deployment/myapp-deployment"
+            - "--replicas=3"
+            - "--namespace=privilee-app"
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: scale-down-myapp
+  namespace: privilee-app
+spec:
+  schedule: "0 20 * * SUN"  # Every Sunday at 20:00
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: kubectl
+            image: bitnami/kubectl
+            command:
+            - "kubectl"
+            - "scale"
+            - "deployment/myapp-deployment"
+            - "--replicas=1"
+            - "--namespace=privilee-app"
+          restartPolicy: OnFailure
