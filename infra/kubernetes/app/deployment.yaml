@@ -4,7 +4,12 @@ metadata:
   name: myapp-deployment
   namespace: privilee-app  # Replace with your app namespace variable
 spec:
-  replicas: 2
+  strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 0
+  replicas: 1
   selector:
     matchLabels:
       app: privilee-app
@@ -15,6 +20,25 @@ spec:
     spec:
       containers:
       - name: privilee-app
-        image: 493892691932.dkr.ecr.me-south-1.amazonaws.com/privilee/hello-world:latest  # Replace with your actual image
+        image: 493892691932.dkr.ecr.me-south-1.amazonaws.com/privilee/hello-world:latest
         ports:
         - containerPort: 1323
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 1323
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 1323
+          initialDelaySeconds: 5
+          periodSeconds: 5
