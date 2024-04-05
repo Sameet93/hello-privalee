@@ -80,3 +80,13 @@ kubectl get pods,svc,ingress -n privilee-app
 ```
 
 use the endpoint value for svc to go to application, use curl or browser
+
+## FINAL
+
+If you would like to view the application running I will keep my environment up for 1 week and you can view the endpoints here
+
+http://acfed43937f0449d9afc58c487e63207-858499323.me-south-1.elb.amazonaws.com/
+
+http://acfed43937f0449d9afc58c487e63207-858499323.me-south-1.elb.amazonaws.com/health
+
+http://acfed43937f0449d9afc58c487e63207-858499323.me-south-1.elb.amazonaws.com/ready
