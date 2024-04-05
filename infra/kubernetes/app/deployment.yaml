@@ -17,4 +17,4 @@ spec:
       - name: privilee-app
         image: 493892691932.dkr.ecr.me-south-1.amazonaws.com/privilee/hello-world:latest  # Replace with your actual image
         ports:
-        - containerPort: 8080
+        - containerPort: 1323
