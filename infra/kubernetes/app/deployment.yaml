@@ -8,15 +8,10 @@ spec:
   selector:
     matchLabels:
       app: privilee-app
-      key1: value1
-      key2: value2
   template:
     metadata:
       labels:
         app: privilee-app
-        # Ensure these match the labels defined in your Fargate profile
-        key1: value1
-        key2: value2
     spec:
       containers:
       - name: privilee-app
