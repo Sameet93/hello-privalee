@@ -41,7 +41,7 @@ spec:
             command:
             - "/bin/bash"
             - "-c"
-            - "kubectl scale deployment myapp-deployment --replicas=3 -n privilee-app"
+            - "kubectl scale deployment/myapp-deployment --replicas=3 -n privilee-app"
           restartPolicy: OnFailure
 ---
 apiVersion: batch/v1
@@ -61,5 +61,5 @@ spec:
             command:
             - "/bin/bash"
             - "-c"
-            - "kubectl scale deployment myapp-deployment --replicas=1 -n privilee-app"
+            - "kubectl scale deployment/myapp-deployment --replicas=1 -n privilee-app"
           restartPolicy: OnFailure
